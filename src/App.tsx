@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Button from "@/components/Button"
 import Input from "@/components/Input"
 import SocketService from "@/services/socket"
@@ -12,6 +12,7 @@ export default function App() {
   const [socketService, setSocketService] = useState<SocketService | null>(null)
   const [error, setError] = useState<boolean>(false)
   const [messages, setMessages] = useState<string[] | null>([])
+  const refInputMessage = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     return () => {
@@ -78,6 +79,9 @@ export default function App() {
     }
     socketService?.send('chat message', messageInput);
     setMessageInput('');
+
+    //focus
+    refInputMessage.current?.focus();
   }
 
   return (
@@ -110,6 +114,7 @@ export default function App() {
 
             <form onSubmit={(e) => { e.preventDefault(); sendMessage() }} className="flex gap-4">
               <Input
+                ref={refInputMessage}
                 value={messageInput}
                 onChange={e => setMessageInput(e.target.value)}
                 disabled={isLoading}

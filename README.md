@@ -13,4 +13,5 @@ To test this app is necessary to have NodeJS installed in your machine.
 
 ## How to run the project
 
-- Run `npm run dev` in both directory `/` and `/server`;
+- Run `npm run dev` in directory `/`;
+- Run `node server.js` in directory `/server`;
